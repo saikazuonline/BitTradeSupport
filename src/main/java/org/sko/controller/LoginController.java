@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LoginController {
     
     @Autowired
-    LoginService loginService;
+    private LoginService loginService;
     
     @Autowired
     protected ResourceLoader resourceLoader;
