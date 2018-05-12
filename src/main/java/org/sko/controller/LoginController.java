@@ -40,20 +40,20 @@ public class LoginController {
     @RequestMapping("/login/do")
     public String LoginDo(Model model, @Valid LoginForm loginForm, BindingResult bindingResult, HttpServletRequest request) {
         
-        String pathAndFile = "json/key.json";
+        String pathAndFile = "static/json/key.json";
         Resource resource = resourceLoader.getResource("classpath:" + pathAndFile);
         
-        if(loginService.login(loginForm) 
-           && loginService.jsonCheck(resource)){
-            
-            model.addAttribute("keyForm", new KeyForm());
+        if (loginService.login(loginForm) 
+                && loginService.jsonCheck(resource)) {
 
-            return "key/index";
-            
-        } else if(loginService.login(loginForm) 
-                && !loginService.jsonCheck(resource)){
-            
             return "trade/index";
+            
+        } else if(loginService.login(loginForm)
+                && !loginService.jsonCheck(resource)) {
+                
+            model.addAttribute("keyForm", new KeyForm());
+            
+            return "key/index";
         }
         
         model.addAttribute("error", "ログイン失敗");
