@@ -11,6 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class LoginController {
+    
+    @RequestMapping("/")
+    public String index(Model model) {
+        
+        return "redirect:/login";
+    }
+    
     @RequestMapping("/login")
     public String Login(Model model) {
         
