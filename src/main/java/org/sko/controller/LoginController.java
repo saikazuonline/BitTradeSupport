@@ -1,7 +1,6 @@
 package org.sko.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.sko.form.KeyForm;
@@ -39,7 +38,7 @@ public class LoginController {
     }
     
     @RequestMapping("/login/do")
-    public String LoginDo(Model model, @Valid LoginForm loginForm, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
+    public String LoginDo(Model model, @Valid LoginForm loginForm, BindingResult bindingResult, HttpServletRequest request) {
         
         String pathAndFile = "json/key.json";
         Resource resource = resourceLoader.getResource("classpath:" + pathAndFile);
