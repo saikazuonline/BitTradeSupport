@@ -2,14 +2,26 @@ package org.sko.service;
 
 import org.apache.commons.lang3.StringUtils;
 import org.sko.form.LoginForm;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 @Service
 public class LoginService {
     
-    public boolean jsonCheck() {
+    /**
+     * Jsonファイル存在チェック
+     * 
+     * @param resource
+     * @return
+     */
+    public boolean jsonCheck(Resource resource) {
         
-        return true;
+        // Jsonファイルが存在しているかチェック
+        if(resource.exists()) {
+            return true;
+        }
+        
+         return false;
     }
     
     /**
@@ -20,8 +32,10 @@ public class LoginService {
      * @return
      */
     public boolean login(LoginForm loginForm) {
-        if (StringUtils.isNotEmpty(loginForm.getUsername()) && StringUtils.isNotEmpty(loginForm.getPassword())) {
-            if ("a".equals(loginForm.getUsername()) && "a".equals(loginForm.getPassword())) {
+        if (StringUtils.isNotEmpty(loginForm.getUsername())
+                && StringUtils.isNotEmpty(loginForm.getPassword())) {
+            if ("a".equals(loginForm.getUsername()) 
+                    && "a".equals(loginForm.getPassword())) {
                 return true;
             }
         }

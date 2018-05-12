@@ -8,6 +8,8 @@ import org.sko.form.KeyForm;
 import org.sko.form.LoginForm;
 import org.sko.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +20,9 @@ public class LoginController {
     
     @Autowired
     LoginService loginService;
+    
+    @Autowired
+    protected ResourceLoader resourceLoader;
     
     @RequestMapping("/")
     public String index(Model model) {
@@ -36,12 +41,20 @@ public class LoginController {
     @RequestMapping("/login/do")
     public String LoginDo(Model model, @Valid LoginForm loginForm, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
         
+        String pathAndFile = "json/key.json";
+        Resource resource = resourceLoader.getResource("classpath:" + pathAndFile);
+        
         if(loginService.login(loginForm) 
-           && loginService.jsonCheck()){
+           && loginService.jsonCheck(resource)){
             
             model.addAttribute("keyForm", new KeyForm());
 
-            return "/key/index";
+            return "key/index";
+            
+        } else if(loginService.login(loginForm) 
+                && !loginService.jsonCheck(resource)){
+            
+            return "trade/index";
         }
         
         model.addAttribute("error", "ログイン失敗");
