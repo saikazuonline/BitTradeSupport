@@ -56,7 +56,7 @@ public class LoginController {
             return "key/index";
         }
         
-        model.addAttribute("error", "ログイン失敗");
+        model.addAttribute("error", "ID 又は PWが違います。");
         model.addAttribute("loginForm", new LoginForm());
         
         return "login/index";

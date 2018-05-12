@@ -1,6 +1,6 @@
 package org.sko.service;
 
-import org.sko.form.LoginForm;
+import org.sko.form.KeyForm;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,7 +11,7 @@ public class KeyService {
      * 
      * @param loginForm
      */
-    public void regist(LoginForm loginForm) {
+    public void regist(KeyForm keyForm) {
         // TODO
     }
 

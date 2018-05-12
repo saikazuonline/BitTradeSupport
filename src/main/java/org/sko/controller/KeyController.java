@@ -3,7 +3,7 @@ package org.sko.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.sko.form.LoginForm;
+import org.sko.form.KeyForm;
 import org.sko.service.KeyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,9 +18,9 @@ public class KeyController {
     private KeyService keyService;
     
     @RequestMapping("/key/regist")
-    public String regist(Model model, @Valid LoginForm loginForm, BindingResult bindingResult, HttpServletRequest request) {
+    public String regist(Model model, @Valid KeyForm keyForm, BindingResult bindingResult, HttpServletRequest request) {
         
-        keyService.regist(loginForm); // TODO
+        keyService.regist(keyForm); // TODO
         
         return "trade/index";
     }
