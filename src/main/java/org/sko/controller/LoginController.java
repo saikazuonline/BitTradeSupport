@@ -5,6 +5,7 @@ import javax.validation.Valid;
 
 import org.sko.form.KeyForm;
 import org.sko.form.LoginForm;
+import org.sko.form.TradeForm;
 import org.sko.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -45,6 +46,8 @@ public class LoginController {
         
         if (loginService.login(loginForm) 
                 && loginService.jsonCheck(resource)) {
+            
+            model.addAttribute("tradeForm", new TradeForm());
 
             return "trade/index";
             
