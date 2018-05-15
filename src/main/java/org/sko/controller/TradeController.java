@@ -52,6 +52,9 @@ public class TradeController {
         try {
             // 購入処理
             tradeService.buy(api, tradeDto);
+            
+            // TODO Json購入内容をJsonに移す処理を追加。
+            
         } catch (BinanceApiException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
