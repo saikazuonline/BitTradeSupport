@@ -1,5 +1,7 @@
 package org.sko.dto;
 
+import java.math.BigDecimal;
+
 public class TradeDto {
     
     private String currency;
@@ -9,6 +11,8 @@ public class TradeDto {
     private String upper;
 
     private String lower;
+    
+    private BigDecimal price;
     
     public String getCurrency() {
         return currency;
@@ -40,6 +44,14 @@ public class TradeDto {
 
     public void setLower(String lower) {
         this.lower = lower;
+    }
+    
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
 }

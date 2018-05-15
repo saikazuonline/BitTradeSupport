@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.webcerebrium.binance.api.BinanceApi;
+import com.webcerebrium.binance.api.BinanceApiException;
 
 @Controller
 public class TradeController {
@@ -22,6 +23,7 @@ public class TradeController {
     @Autowired
     private TradeService tradeService;
     
+    // Dtoインスタンス生成
     private TradeDto tradeDto;
     
     // BinanceApiインスタンス生成
@@ -32,16 +34,29 @@ public class TradeController {
         
         // インスタンス生成
         api = new BinanceApi();
+        // インスタンス生成
+        tradeDto = new TradeDto();
         
         // apiKeyとsecretKeyを取得
         KeyDto keyDto = tradeService.getKey();
         
-        tradeDto = new TradeDto();
+        api.setApiKey(keyDto.getApiKey());
+        api.setSecretKey(keyDto.getSecretKey());
         
         // formをdtoにコピー
         BeanUtils.copyProperties(tradeForm, tradeDto);
         
-        // TODO
+        // 値段を取得しセット
+        tradeDto = tradeService.getPrice(tradeDto, api);
+        
+        try {
+            // 購入処理
+            tradeService.buy(api, tradeDto);
+        } catch (BinanceApiException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
         return "trade/wait";
     }
     
