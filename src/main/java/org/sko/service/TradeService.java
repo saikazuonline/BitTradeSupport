@@ -125,5 +125,17 @@ public class TradeService {
         System.out.println(order.toString());
         
     }
+    
+    public void sell(BinanceApi api, TradeDto tradeDto) throws BinanceApiException {
+        
+        BinanceSymbol symbol = new BinanceSymbol(tradeDto.getCurrency() + "BTC");
+        BinanceOrderPlacement placement = new BinanceOrderPlacement(symbol, BinanceOrderSide.BUY);
+        placement.setType(BinanceOrderType.LIMIT);
+        placement.setPrice(tradeDto.getPrice());
+        placement.setQuantity(new BigDecimal(tradeDto.getQuentity()));
+        BinanceOrder order = api.getOrderById(symbol, api.createOrder(placement).get("orderId").getAsLong());
+        System.out.println(order.toString());
+        
+    }
 
 }
