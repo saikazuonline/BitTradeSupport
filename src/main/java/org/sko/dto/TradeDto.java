@@ -3,17 +3,17 @@ package org.sko.dto;
 import java.math.BigDecimal;
 
 public class TradeDto {
-    
+
     private String currency;
 
     private String quentity;
-    
+
     private String upper;
 
     private String lower;
-    
+
     private BigDecimal price;
-    
+
     public String getCurrency() {
         return currency;
     }
@@ -21,7 +21,7 @@ public class TradeDto {
     public void setCurrency(String currency) {
         this.currency = currency;
     }
-    
+
     public String getQuentity() {
         return quentity;
     }
@@ -29,7 +29,7 @@ public class TradeDto {
     public void setQuentity(String quentity) {
         this.quentity = quentity;
     }
-    
+
     public String getUpper() {
         return upper;
     }
@@ -37,7 +37,7 @@ public class TradeDto {
     public void setUpper(String upper) {
         this.upper = upper;
     }
-    
+
     public String getLower() {
         return lower;
     }
@@ -45,7 +45,7 @@ public class TradeDto {
     public void setLower(String lower) {
         this.lower = lower;
     }
-    
+
     public BigDecimal getPrice() {
         return price;
     }

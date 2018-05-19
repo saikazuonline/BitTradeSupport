@@ -1,11 +1,11 @@
 package org.sko.dto;
 
 public class KeyDto {
-    
+
     private String apiKey;
 
     private String secretKey;
-    
+
     public String getApiKey() {
         return apiKey;
     }

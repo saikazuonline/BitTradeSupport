@@ -14,17 +14,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class KeyController {
-    
+
     @Autowired
     private KeyService keyService;
-    
+
     @RequestMapping("/key/regist")
-    public String regist(Model model, @Valid KeyForm keyForm, BindingResult bindingResult, HttpServletRequest request) {
-        
+    public String regist(Model model, @Valid KeyForm keyForm, BindingResult bindingResult, HttpServletRequest request)
+            throws Exception {
+
         keyService.regist(keyForm); // TODO
-        
+
         model.addAttribute("tradeForm", new TradeForm());
-        
+
         return "trade/index";
     }
 

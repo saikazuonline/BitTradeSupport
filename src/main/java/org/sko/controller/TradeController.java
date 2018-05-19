@@ -19,48 +19,49 @@ import com.webcerebrium.binance.api.BinanceApiException;
 
 @Controller
 public class TradeController {
-    
+
     @Autowired
     private TradeService tradeService;
-    
+
     // Dtoインスタンス生成
     private TradeDto tradeDto;
-    
+
     // BinanceApiインスタンス生成
     BinanceApi api;
 
     @RequestMapping("/trade/do")
-    public String tradeDo(Model model, @Valid TradeForm tradeForm, BindingResult bindingResult, HttpServletRequest request) {
-        
+    public String tradeDo(Model model, @Valid TradeForm tradeForm, BindingResult bindingResult,
+            HttpServletRequest request) throws Exception {
+
         // インスタンス生成
         api = new BinanceApi();
         // インスタンス生成
         tradeDto = new TradeDto();
-        
+
         // apiKeyとsecretKeyを取得
         KeyDto keyDto = tradeService.getKey();
-        
+
         api.setApiKey(keyDto.getApiKey());
         api.setSecretKey(keyDto.getSecretKey());
-        
+
         // formをdtoにコピー
         BeanUtils.copyProperties(tradeForm, tradeDto);
-        
+
         // 値段を取得しセット
         tradeDto = tradeService.getPrice(tradeDto, api);
-        
+
         try {
             // 購入処理
             tradeService.buy(api, tradeDto);
-            
+
         } catch (BinanceApiException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        
+
         tradeService.setJson(tradeDto);
-        
+
         return "trade/wait";
     }
-    
+
 }

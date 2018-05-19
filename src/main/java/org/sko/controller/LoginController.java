@@ -17,51 +17,50 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class LoginController {
-    
+
     @Autowired
     private LoginService loginService;
-    
+
     @Autowired
     protected ResourceLoader resourceLoader;
-    
+
     @RequestMapping("/")
     public String index(Model model) {
-        
+
         return "redirect:/login";
     }
-    
+
     @RequestMapping("/login")
     public String Login(Model model) {
-        
+
         model.addAttribute("loginForm", new LoginForm());
-        
+
         return "login/index";
     }
-    
+
     @RequestMapping("/login/do")
-    public String LoginDo(Model model, @Valid LoginForm loginForm, BindingResult bindingResult, HttpServletRequest request) {
-        
+    public String LoginDo(Model model, @Valid LoginForm loginForm, BindingResult bindingResult,
+            HttpServletRequest request) {
+
         String pathAndFile = "static/json/key.json";
         Resource resource = resourceLoader.getResource("classpath:" + pathAndFile);
-        
-        if (loginService.login(loginForm) 
-                && loginService.jsonCheck(resource)) {
-            
+
+        if (loginService.login(loginForm) && loginService.jsonCheck(resource)) {
+
             model.addAttribute("tradeForm", new TradeForm());
 
             return "trade/index";
-            
-        } else if(loginService.login(loginForm)
-                && !loginService.jsonCheck(resource)) {
-                
+
+        } else if (loginService.login(loginForm) && !loginService.jsonCheck(resource)) {
+
             model.addAttribute("keyForm", new KeyForm());
-            
+
             return "key/index";
         }
-        
+
         model.addAttribute("error", "ID 又は PWが違います。");
         model.addAttribute("loginForm", new LoginForm());
-        
+
         return "login/index";
     }
 }
